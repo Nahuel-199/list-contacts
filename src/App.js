@@ -2,6 +2,8 @@ import { AddIcon, Search2Icon } from "@chakra-ui/icons";
 import { Image } from "@chakra-ui/image";
 import { Flex, Heading } from "@chakra-ui/layout";
 import { Box } from "@chakra-ui/layout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Button,
   Input,
@@ -121,12 +123,13 @@ function App() {
 
   return (
     <>
+      <ToastContainer position="bottom-center" />
       <ModalComponent
         isOpen={isOpen}
         title={"Agrgar nuevo contacto"}
         onOpen={onOpen}
         onClose={onClose}
-      >
+        >
         <ContactForm addNewContact={addNewContact} onClose={onClose} />
       </ModalComponent>
 

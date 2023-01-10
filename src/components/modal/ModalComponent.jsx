@@ -12,9 +12,10 @@ const ModalComponent = ({ onOpen, isOpen, onClose, children, title }) => {
 
   return (
     <>
-      <Modal style={{height: "135vh", top: "-50px"}} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
+     <div className="inodasd">
+      <Modal isOpen={isOpen} onClose={onClose} >
+        <ModalOverlay/>
+        <ModalContent >
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -22,6 +23,7 @@ const ModalComponent = ({ onOpen, isOpen, onClose, children, title }) => {
           </ModalBody>
         </ModalContent>
       </Modal>
+      </div>
     </>
   );
 };

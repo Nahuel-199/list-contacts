@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Stack } from "@chakra-ui/layout";
+import { toast } from "react-toastify";
 import {
     Button,
     FormControl,
@@ -17,10 +18,11 @@ const ContactForm = ({ addNewContact, onClose, contact, updateContact }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if(contact){
+      if(contact){
            updateContact(nombre, razonSocial, telefono, nit, codigo, contact.id)
            onClose();
-        } else {
+           toast.success("Contacto modificado con éxito");
+        }else {
        addNewContact(nombre, razonSocial, telefono, nit, codigo)
        onClose();
         }
@@ -28,11 +30,12 @@ const ContactForm = ({ addNewContact, onClose, contact, updateContact }) => {
 
   return (
     <Stack>
-    <FormControl id="nombre">
+    <FormControl id="nombre" >
       <FormLabel>Nombre</FormLabel>
       <Input 
       type="text" 
       value={nombre}
+      required
       onChange={(e) => setNombre(e.target.value)}
       />
     </FormControl>
@@ -41,6 +44,7 @@ const ContactForm = ({ addNewContact, onClose, contact, updateContact }) => {
       <Input 
       type="text" 
       value={razonSocial}
+      required
       onChange={(e) => setRazonSocial(e.target.value)}
       />
     </FormControl>
@@ -49,6 +53,7 @@ const ContactForm = ({ addNewContact, onClose, contact, updateContact }) => {
       <Input 
       type="text" 
       value={nit}
+      required
       onChange={(e) => setNit(e.target.value)}
       />
     </FormControl>
@@ -57,6 +62,7 @@ const ContactForm = ({ addNewContact, onClose, contact, updateContact }) => {
       <Input 
       type="text" 
       value={telefono}
+      required
       onChange={(e) => setTelefono(e.target.value)}
       />
     </FormControl>
@@ -65,6 +71,7 @@ const ContactForm = ({ addNewContact, onClose, contact, updateContact }) => {
       <Input 
       type="text"
       value={codigo}
+      required
       onChange={(e) => setCodigo(e.target.value)}
        />
     </FormControl>
