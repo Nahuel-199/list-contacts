@@ -26,7 +26,7 @@ const ContactCard = ({ contact, onOpen, getContactId, deleteContact }) => {
     >
       <Flex align="center">
         <Box mr="4">
-          <FontAwesomeIcon size="3x" icon={faUser} mr="4" />
+          <FontAwesomeIcon size="3x" icon={faUser} mr="4" style={{width: "30px"}}/>
         </Box>
         <Stack>
           <Text>{contact.nombre}</Text>
@@ -39,10 +39,10 @@ const ContactCard = ({ contact, onOpen, getContactId, deleteContact }) => {
 
       <Flex align="center" cursor="pointer">
         <Box mr="4" onClick={() => updateHandler(contact.id)}>
-          <FontAwesomeIcon size="2x" icon={faEdit} />
+          <FontAwesomeIcon size="5x" icon={faEdit} style={{width: "30px"}}/>
         </Box>
         <Box color="red.300" onClick={() => deleteContactHandler(contact.id)}>
-          <FontAwesomeIcon size="2x" icon={faTrash} />
+          <FontAwesomeIcon size="5x" icon={faTrash} style={{width: "30px"}}/>
         </Box>
       </Flex>
     </Flex>

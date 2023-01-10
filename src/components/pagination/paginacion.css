@@ -1,0 +1,42 @@
+.containerPagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.containerPagination > button {
+    background-color: #242424;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+svg{
+    width: 10px;
+}
+
+.containerPagination > button[disabled] {
+    background-color: #474747;
+    cursor: no-drop;   
+}
+
+.containerPagination >  input {
+    height: 30px;
+    width: 50px;
+    text-align: center;
+    border: 1px solid #242424;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 850px) {
+    .containerPagination {
+      margin-top: -25px;
+    }
+}

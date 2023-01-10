@@ -21,6 +21,7 @@ import {
   updateContactOnServer,
   deleteContactOnServer,
 } from "./network";
+import Paginacion from "./components/pagination/Paginacion";
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,7 +32,9 @@ function App() {
     onClose: onCloseEdit,
   } = useDisclosure();
 
-  const [SearchData, setSearchData] = useState("");
+  const [pagina, setPagina] = useState(1);
+  const [porPagina,] = useState(5);
+  const [SearchData, setSearchData] = useState("")
   const [contacts, setContacts] = useState([]);
   const [contactId, setContactId] = useState();
 
@@ -77,6 +80,9 @@ function App() {
   let searchContacts = contacts.filter((contact) =>
     contact.nombre.includes(SearchData)
   );
+  console.log(SearchData);
+
+  const maximo = contacts.length / porPagina;
 
   const getContactId = (id) => {
     setContactId(id);
@@ -113,9 +119,9 @@ function App() {
   };
 
   const deleteContact = async (id) => {
-    const data = await deleteContactOnServer(id)
-    if(data === null) {
-    setContacts((prev) => [...contacts.filter((cont) => cont.id !== id)]);
+    const data = await deleteContactOnServer(id);
+    if (data === null) {
+      setContacts((prev) => [...contacts.filter((cont) => cont.id !== id)]);
     }
   };
 
@@ -129,7 +135,7 @@ function App() {
         title={"Agrgar nuevo contacto"}
         onOpen={onOpen}
         onClose={onClose}
-        >
+      >
         <ContactForm addNewContact={addNewContact} onClose={onClose} />
       </ModalComponent>
 
@@ -154,7 +160,7 @@ function App() {
           </Heading>
         </Flex>
         <Box p="4">
-          <Button 
+          <Button
             bg="blackAlpha.900"
             color="white"
             w="97%"
@@ -180,20 +186,26 @@ function App() {
             />
           </InputGroup>
         </Box>
-        <Box  className="scrollBar" p="4">
-          {searchContacts.map((contact) => (
-            <div>
-            <ContactCard
-              getContactId={getContactId}
-              onOpen={onOpenEdit}
-              contact={contact}
-              key={contact.id}
-              deleteContact={deleteContact}
-            />
-            </div>
-          ))}
+        <Box className="scrollBar" p="4">
+          {searchContacts
+            .slice(
+              (pagina - 1) * porPagina,
+              (pagina - 1) * porPagina + porPagina
+            )
+            .map((contact) => (
+              <div>
+                <ContactCard
+                  getContactId={getContactId}
+                  onOpen={onOpenEdit}
+                  contact={contact}
+                  key={contact.id}
+                  deleteContact={deleteContact}
+                />
+              </div>
+            ))}
         </Box>
       </Box>
+      <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo}/>
     </>
   );
 }
